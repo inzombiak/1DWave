@@ -121,6 +121,9 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(m_maxRho->sizePolicy().hasHeightForWidth());
         m_maxRho->setSizePolicy(sizePolicy1);
+        m_maxRho->setMaximum(100);
+        m_maxRho->setSingleStep(0.01);
+        m_maxRho->setValue(100);
 
         gridLayout->addWidget(m_maxRho, 3, 1, 1, 1);
 
@@ -137,6 +140,8 @@ public:
         sizePolicy1.setHeightForWidth(m_uS0->sizePolicy().hasHeightForWidth());
         m_uS0->setSizePolicy(sizePolicy1);
         m_uS0->setDecimals(4);
+        m_uS0->setSingleStep(0.05);
+        m_uS0->setValue(0.45);
 
         gridLayout->addWidget(m_uS0, 5, 1, 1, 1);
 
@@ -145,6 +150,8 @@ public:
         sizePolicy1.setHeightForWidth(m_deltaRho->sizePolicy().hasHeightForWidth());
         m_deltaRho->setSizePolicy(sizePolicy1);
         m_deltaRho->setDecimals(4);
+        m_deltaRho->setSingleStep(0.01);
+        m_deltaRho->setValue(1);
 
         gridLayout->addWidget(m_deltaRho, 7, 1, 1, 1);
 
@@ -153,6 +160,8 @@ public:
         sizePolicy1.setHeightForWidth(m_amplitude->sizePolicy().hasHeightForWidth());
         m_amplitude->setSizePolicy(sizePolicy1);
         m_amplitude->setDecimals(4);
+        m_amplitude->setSingleStep(0.01);
+        m_amplitude->setValue(0.2);
 
         gridLayout->addWidget(m_amplitude, 9, 1, 1, 1);
 
@@ -184,7 +193,9 @@ public:
         m_alpha->setObjectName(QStringLiteral("m_alpha"));
         sizePolicy1.setHeightForWidth(m_alpha->sizePolicy().hasHeightForWidth());
         m_alpha->setSizePolicy(sizePolicy1);
-        m_alpha->setDecimals(4);
+        m_alpha->setDecimals(10);
+        m_alpha->setMinimum(-2);
+        m_alpha->setValue(1);
 
         gridLayout->addWidget(m_alpha, 13, 1, 1, 1);
 
@@ -222,6 +233,8 @@ public:
         m_saveInterval->setObjectName(QStringLiteral("m_saveInterval"));
         sizePolicy1.setHeightForWidth(m_saveInterval->sizePolicy().hasHeightForWidth());
         m_saveInterval->setSizePolicy(sizePolicy1);
+        m_saveInterval->setMaximum(50000);
+        m_saveInterval->setValue(180);
 
         gridLayout->addWidget(m_saveInterval, 22, 1, 1, 1);
 
@@ -229,6 +242,8 @@ public:
         m_steps->setObjectName(QStringLiteral("m_steps"));
         sizePolicy1.setHeightForWidth(m_steps->sizePolicy().hasHeightForWidth());
         m_steps->setSizePolicy(sizePolicy1);
+        m_steps->setMaximum(50000000);
+        m_steps->setValue(30000);
 
         gridLayout->addWidget(m_steps, 24, 1, 1, 1);
 
@@ -276,6 +291,9 @@ public:
         m_minRho->setObjectName(QStringLiteral("m_minRho"));
         sizePolicy1.setHeightForWidth(m_minRho->sizePolicy().hasHeightForWidth());
         m_minRho->setSizePolicy(sizePolicy1);
+        m_minRho->setMinimum(0);
+        m_minRho->setSingleStep(0.01);
+        m_minRho->setValue(0);
 
         gridLayout->addWidget(m_minRho, 1, 1, 1, 1);
 
@@ -307,7 +325,9 @@ public:
         m_epsilon->setObjectName(QStringLiteral("m_epsilon"));
         sizePolicy1.setHeightForWidth(m_epsilon->sizePolicy().hasHeightForWidth());
         m_epsilon->setSizePolicy(sizePolicy1);
-        m_epsilon->setDecimals(4);
+        m_epsilon->setDecimals(6);
+        m_epsilon->setSingleStep(1e-05);
+        m_epsilon->setValue(1e-05);
 
         gridLayout->addWidget(m_epsilon, 18, 1, 1, 1);
 
@@ -324,6 +344,8 @@ public:
         sizePolicy1.setHeightForWidth(m_rho0->sizePolicy().hasHeightForWidth());
         m_rho0->setSizePolicy(sizePolicy1);
         m_rho0->setDecimals(4);
+        m_rho0->setSingleStep(0.01);
+        m_rho0->setValue(50);
 
         gridLayout->addWidget(m_rho0, 15, 1, 1, 1);
 
@@ -359,6 +381,16 @@ public:
         MainWindowClass->setStatusBar(statusBar);
 
         retranslateUi(MainWindowClass);
+        QObject::connect(m_minRho, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_maxRho, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_uS0, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_deltaRho, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_amplitude, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_chi0, SIGNAL(valueChanged(QString)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_alpha, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_rho0, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_epsilon, SIGNAL(valueChanged(double)), MainWindowClass, SLOT(UpdateGraph()));
+        QObject::connect(m_dSigdTauFlag, SIGNAL(toggled(bool)), MainWindowClass, SLOT(UpdateGraph()));
 
         QMetaObject::connectSlotsByName(MainWindowClass);
     } // setupUi

@@ -63,6 +63,15 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximum">
+           <double>100.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>100.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="7" column="0">
@@ -94,6 +103,12 @@
           <property name="decimals">
            <number>4</number>
           </property>
+          <property name="singleStep">
+           <double>0.050000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.450000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="7" column="1">
@@ -107,6 +122,12 @@
           <property name="decimals">
            <number>4</number>
           </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="9" column="1">
@@ -119,6 +140,12 @@
           </property>
           <property name="decimals">
            <number>4</number>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.200000000000000</double>
           </property>
          </widget>
         </item>
@@ -180,7 +207,16 @@
            </sizepolicy>
           </property>
           <property name="decimals">
-           <number>4</number>
+           <number>10</number>
+          </property>
+          <property name="minimum">
+           <double>-2.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -258,6 +294,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximum">
+           <number>50000</number>
+          </property>
+          <property name="value">
+           <number>180</number>
+          </property>
          </widget>
         </item>
         <item row="24" column="1">
@@ -267,6 +309,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>50000000</number>
+          </property>
+          <property name="value">
+           <number>30000</number>
           </property>
          </widget>
         </item>
@@ -392,6 +440,15 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimum">
+           <double>0.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="0" column="0">
@@ -481,7 +538,13 @@
            </sizepolicy>
           </property>
           <property name="decimals">
-           <number>4</number>
+           <number>6</number>
+          </property>
+          <property name="singleStep">
+           <double>0.000010000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000010000000000</double>
           </property>
          </widget>
         </item>
@@ -513,6 +576,12 @@
           </property>
           <property name="decimals">
            <number>4</number>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>50.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -563,5 +632,169 @@
  <resources>
   <include location="MainWindow.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_minRho</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_maxRho</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_uS0</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>271</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>446</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_deltaRho</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>285</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_amplitude</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>262</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>444</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_chi0</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>323</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_alpha</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>430</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_rho0</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_epsilon</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>475</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>438</x>
+     <y>499</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_dSigdTauFlag</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>UpdateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>UpdateGraph()</slot>
+ </slots>
 </ui>
