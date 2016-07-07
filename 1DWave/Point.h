@@ -23,6 +23,7 @@ struct DiskParameters
 	double C1, C2, C3, C4;
 	double BIG_TWO;
 	double Epsilon;
+	double minRo, maxRo;
 	__host__ __device__
 		void SetParameters();
 };

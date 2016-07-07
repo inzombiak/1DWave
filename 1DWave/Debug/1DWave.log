@@ -3,5 +3,4 @@
   MainWindow.cpp
   main.cpp
   Generating Code...
-LUAPlus.lib(lapi.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   1DWave.vcxproj -> E:\VC++\1DWave\Win32\Debug\1DWave.exe

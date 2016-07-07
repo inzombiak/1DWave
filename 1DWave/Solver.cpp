@@ -11,10 +11,26 @@ using std::cin;
 using std::endl;
 using std::string;
 
-void Solver::Init()
+void Solver::Init(const DiskParameters& dp, const std::vector<Point>& initialPoints, int steps, int saveInterval, bool dSigmaDtau)
 {
 	LuaStateManager::Create();
-	string description, inputFilepath, token;
+
+	m_discParams = dp;
+	m_steps = steps;
+	m_saveInterval = saveInterval;
+	m_dSigmadTauFlag = dSigmaDtau;
+
+	m_hostDistribution.clear();
+	m_hostDistribution.resize(2);
+	m_hostDistribution[0].resize(initialPoints.size());
+	m_hostDistribution[1].resize(initialPoints.size());
+	
+
+	m_hostDistribution[0] = initialPoints;
+	m_outputDirectory = "Output/Test2";
+	CreateDirectoryA(m_outputDirectory.c_str(), NULL);
+
+	/*string description, inputFilepath, token;
 	char temp;
 	std::ifstream m_inputFile;
 	cout << "Enter input filenames (without .lua) delimited with commas: ";
@@ -65,7 +81,7 @@ void Solver::Init()
 		Run(output);
 
 		m_inputFile.close();
-	}
+	}*/
 
 }
 
@@ -76,7 +92,9 @@ void Solver::Run(string outputFilename)
 	int readRow, writeRow;
 	string outputFilepath;
 	std::ofstream outputFile;
-
+	outputFilepath = m_outputDirectory + "/test" + ".txt";
+	outputFile.open(outputFilepath, std::ofstream::trunc);
+	outputFile << m_discParams.minRo << " " << m_discParams.maxRo << " " << m_discParams.deltaRo << endl;
 	for (i = 1; i < m_steps; ++i)
 	{
 		readRow = (i + 1) % 2;
@@ -89,34 +107,33 @@ void Solver::Run(string outputFilename)
 		
 		if (i%m_saveInterval == 0)
 		{
-			outputFilepath =  outputFilename + "/Time" + std::to_string(rint(m_hostDistribution[writeRow][0].GetTau())) + ".txt";
-			outputFile.open(outputFilepath, std::ofstream::trunc);
+			
+			
+			if (!outputFile)
+				cout << "Could nto open file" << std::endl;
 
 			for (unsigned int j = 1; j < distribSize-1; ++j)
 			{
 				outputFile << m_hostDistribution[writeRow][j].GetSigmaByString() << endl;
 			}
-			outputFile.close();
+			
 			
 		}
-
 	}
 	
-	outputFilepath = outputFilename + "/FINAL" + ".txt";
-	outputFile.open(outputFilepath, std::ofstream::trunc);
+	//for (unsigned int j = 1; j < distribSize - 1; ++j)
+	//{
+	//	outputFile << m_hostDistribution[writeRow][j].GetValuesByString()<< endl;
+	//}
 
-	for (unsigned int j = 1; j < distribSize - 1; ++j)
-	{
-		outputFile << m_hostDistribution[writeRow][j].GetValuesByString()<< endl;
-	}
-	outputFile.close();
+	//outputFile.close();
 
 }
 void Solver::CalculateOnGPU(int readRow, int writeRow, const DiskParameters& m_discParams)
 {
 	CalculateOnGPUKernel(m_hostDistribution[readRow], m_hostDistribution[writeRow], m_discParams);
 }
-
+/*
 void Solver::LoadFromLUA(int filenameIndex)
 {
 	string input;
@@ -148,3 +165,4 @@ void Solver::LoadFromLUA(int filenameIndex)
 
 	m_hostDistribution[1].resize(m_hostDistribution[0].size());
 }
+*/
